@@ -31,7 +31,10 @@ const atributos = (segundos: number): string =>
   [
     "Path=/",
     "HttpOnly",
-    "SameSite=Strict",
+    /* En producción el frontend y la API son orígenes distintos (Netlify / Railway),
+       así que SameSite=None + Secure es necesario para que la cookie viaje.
+       La protección CSRF la sigue dando el header X-Panel obligatorio en escrituras. */
+    esProduccion ? "SameSite=None" : "SameSite=Strict",
     ...(esProduccion ? ["Secure"] : []),
     `Max-Age=${segundos}`
   ].join("; ");
