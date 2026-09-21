@@ -1,21 +1,19 @@
 #!/bin/sh
 # Econnet · backend-api — arranque en Railway.
-# Ejecuta las migraciones pendientes antes de levantar el servidor.
 set -e
 
 if [ -z "$DATABASE_URL" ]; then
   echo "[entrypoint] ERROR: DATABASE_URL no está definida." >&2
-  echo "[entrypoint] En Railway: Variables → Add Reference → PostgreSQL → DATABASE_URL" >&2
   exit 1
 fi
 
-# prisma.config.ts usa «import dotenv/config» para leer la URL.
-# En producción no hay .env, así que lo creamos temporalmente para que
-# el runner TypeScript interno de Prisma pueda cargar DATABASE_URL.
+# Las migraciones se ejecutan de forma no-fatal: si el CLI de Prisma falla
+# al cargar prisma.config.ts en el runtime del contenedor, el servidor arranca
+# igual. Las migraciones pendientes se aplican manualmente con «railway run».
 printf 'DATABASE_URL=%s\n' "$DATABASE_URL" > .env
-
-echo "[entrypoint] Ejecutando migraciones..."
-node_modules/.bin/prisma migrate deploy
+echo "[entrypoint] Ejecutando migraciones (no-fatal)..."
+node_modules/.bin/prisma migrate deploy 2>&1 && echo "[entrypoint] Migraciones OK." \
+  || echo "[entrypoint] Advertencia: migrate deploy falló. Aplica migraciones manualmente."
 rm -f .env
 
 echo "[entrypoint] Arrancando servidor..."
