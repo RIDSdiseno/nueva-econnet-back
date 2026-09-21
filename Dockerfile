@@ -8,7 +8,9 @@ FROM node:24-alpine AS build
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-RUN npx prisma generate && npm run build
+# prisma generate solo lee el schema, no se conecta a la DB.
+# DATABASE_URL dummy evita el error de validación en prisma.config.ts.
+RUN DATABASE_URL=postgresql://build:build@localhost:5432/build npx prisma generate && npm run build
 
 FROM node:24-alpine AS runtime
 ENV NODE_ENV=production
