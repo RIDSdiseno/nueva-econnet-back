@@ -1,0 +1,709 @@
+{
+  "extraccion": "18-09-2026",
+  "productos": [
+    {
+      "id": "asus-pm3406-ly0433x",
+      "sku": "NT104ASU15",
+      "url": "https://econnet.cl/producto/asus-expertbook-pm3406cka-ly0433x/",
+      "marca": "ASUS",
+      "nombre": "ExpertBook PM3406CKA-LY0433X",
+      "etiqueta": "Profesional",
+      "color": "#5C8CFF",
+      "categoria": "Notebook",
+      "condicion": null,
+      "garantia": null,
+      "precio": {
+        "lista": 1385339,
+        "venta": 1185990
+      },
+      "marketplaces": {
+        "falabella": 1721990
+      },
+      "stock": {
+        "estado": "En stock",
+        "unidades": 10
+      },
+      "specs": {
+        "cpu": "AMD Ryzen 5 330 · 4 núcleos, 8 hilos, hasta 4,5 GHz, con NPU",
+        "gpu": "AMD Radeon 820M integrada",
+        "ram": "16 GB DDR5 · 2 SO-DIMM, ampliable a 64 GB",
+        "almacenamiento": "512 GB SSD NVMe PCIe 4.0",
+        "pantalla": "14\" WUXGA antirreflejo, 16:10 · 1920 × 1200",
+        "so": "Windows 11 Pro",
+        "conectividad": "Wi-Fi 7 · Bluetooth 5.4 · RJ-45 1 Gb · 2 USB-C 3.2, 2 USB-A, HDMI 2.1",
+        "seguridad": "Huella en el botón de encendido, TPM 2.0, obturador de cámara, Kensington Nano",
+        "bateria": "70 Wh · cargador USB-C de 65 W",
+        "peso": "1,48 kg"
+      },
+      "usos": [
+        "trabajar",
+        "empresa"
+      ],
+      "valores": [
+        "portabilidad",
+        "soporte"
+      ],
+      "para": "Oficina y teletrabajo exigente: 1,48 kg, Windows 11 Pro y se carga con el mismo cargador USB-C del teléfono.",
+      "noPara": "Render 3D, edición 4K o juego: la gráfica es integrada y ahí se queda corta.",
+      "alerta": "La condición del equipo no consta en la ficha.",
+      "fuente": "Ficha de producto en econnet.cl",
+      "fecha": "18-09-2026",
+      "confianza": "alta"
+    },
+    {
+      "id": "hp-elitebook-840-g11",
+      "url": "https://econnet.cl/producto/notebook-hp-elitebook-840-g11-de-14-intel-core-ultra-5-125uram-16-gb-512-gb/",
+      "marca": "HP",
+      "nombre": "EliteBook 840 G11 14\"",
+      "etiqueta": "Renovado",
+      "color": "#7FB0D8",
+      "categoria": "Notebook",
+      "condicion": "Reacondicionado",
+      "garantia": null,
+      "precio": {
+        "lista": 1599990,
+        "venta": 1150000
+      },
+      "marketplaces": {},
+      "stock": {
+        "estado": "Stock desconocido",
+        "unidades": null
+      },
+      "specs": {
+        "cpu": "Intel Core Ultra 5 125U · 12 núcleos, 14 hilos, hasta 4,3 GHz, 12 MB L3",
+        "gpu": "Intel Graphics integrada",
+        "ram": "16 GB DDR5-5600 · 1 × 16 GB, 2 ranuras SODIMM",
+        "almacenamiento": "512 GB SSD PCIe NVMe M.2",
+        "pantalla": "14\" WUXGA IPS antirreflejo, 300 nits, 45% NTSC · 1920 × 1200",
+        "so": null,
+        "conectividad": null,
+        "seguridad": "Teclado resistente a salpicaduras",
+        "bateria": null,
+        "peso": null
+      },
+      "usos": [
+        "trabajar",
+        "empresa",
+        "renovados"
+      ],
+      "valores": [
+        "soporte",
+        "portabilidad",
+        "precio"
+      ],
+      "para": "Gama corporativa alta por bastante menos: mismo chasis y misma pantalla que el equipo nuevo, revisado.",
+      "noPara": "Quien necesita garantía de fábrica completa, o quien no quiera averiguar qué sistema trae.",
+      "alerta": "Sistema operativo, batería, peso y stock no constan en la ficha.",
+      "fuente": "Ficha de producto en econnet.cl",
+      "fecha": "18-09-2026",
+      "confianza": "alta"
+    },
+    {
+      "id": "asus-expertbook-p5",
+      "marca": "ASUS",
+      "nombre": "ExpertBook P5",
+      "etiqueta": "Alto rendimiento",
+      "color": "#4FC8A8",
+      "categoria": "Notebook",
+      "condicion": null,
+      "garantia": null,
+      "precio": {
+        "lista": 2199990,
+        "venta": 1854990
+      },
+      "marketplaces": {},
+      "stock": {
+        "estado": "Stock desconocido",
+        "unidades": null
+      },
+      "specs": {
+        "cpu": "Intel Core Ultra 7 258V",
+        "gpu": null,
+        "ram": "32 GB DDR5",
+        "almacenamiento": "1 TB SSD NVMe 2280",
+        "pantalla": null,
+        "so": "Windows 11 Pro",
+        "conectividad": null,
+        "seguridad": null,
+        "bateria": null,
+        "peso": null
+      },
+      "usos": [
+        "crear",
+        "trabajar",
+        "empresa"
+      ],
+      "valores": [
+        "potencia",
+        "portabilidad",
+        "soporte"
+      ],
+      "para": "El más equipado de la línea profesional: 32 GB y 1 TB para trabajar con archivos grandes sin depender de un disco externo.",
+      "noPara": "Quien solo hace ofimática: es el doble de memoria de la que va a ocupar, y se paga.",
+      "alerta": "Pantalla, batería, peso y condición no constan en el catálogo.",
+      "fuente": "Catálogo indexado de econnet.cl",
+      "fecha": "18-09-2026",
+      "confianza": "media"
+    },
+    {
+      "id": "asus-expertbook-b1",
+      "marca": "ASUS",
+      "nombre": "ExpertBook B1",
+      "etiqueta": "Empresa",
+      "color": "#6E7FA6",
+      "categoria": "Notebook",
+      "condicion": null,
+      "garantia": null,
+      "precio": {
+        "lista": 1354990,
+        "venta": 989990
+      },
+      "marketplaces": {},
+      "stock": {
+        "estado": "Stock desconocido",
+        "unidades": null
+      },
+      "specs": {
+        "cpu": "Intel Core i5-1334U",
+        "gpu": null,
+        "ram": "16 GB DDR5",
+        "almacenamiento": "512 GB SSD NVMe 2280",
+        "pantalla": null,
+        "so": "Windows 11 Pro",
+        "conectividad": null,
+        "seguridad": null,
+        "bateria": null,
+        "peso": null
+      },
+      "usos": [
+        "trabajar",
+        "empresa"
+      ],
+      "valores": [
+        "soporte",
+        "precio"
+      ],
+      "para": "Puesto administrativo completo por menos de un millón, con Windows 11 Pro para conectarlo al dominio de la empresa.",
+      "noPara": "Trabajo gráfico: el i5 de bajo consumo está pensado para ofimática, no para render.",
+      "alerta": "Pantalla, batería, peso y condición no constan en el catálogo.",
+      "fuente": "Catálogo indexado de econnet.cl",
+      "fecha": "18-09-2026",
+      "confianza": "media"
+    },
+    {
+      "id": "asus-expertbook-p1",
+      "marca": "ASUS",
+      "nombre": "ExpertBook P1",
+      "etiqueta": "Profesional",
+      "color": "#5C8CFF",
+      "categoria": "Notebook",
+      "condicion": null,
+      "garantia": null,
+      "precio": {
+        "lista": 1150990,
+        "venta": 928990
+      },
+      "marketplaces": {},
+      "stock": {
+        "estado": "Stock desconocido",
+        "unidades": null
+      },
+      "specs": {
+        "cpu": "Intel Core i5-13420H",
+        "gpu": null,
+        "ram": "16 GB DDR5",
+        "almacenamiento": "512 GB SSD NVMe 2280",
+        "pantalla": null,
+        "so": "Windows 11 Pro",
+        "conectividad": null,
+        "seguridad": null,
+        "bateria": null,
+        "peso": null
+      },
+      "usos": [
+        "trabajar",
+        "estudiar"
+      ],
+      "valores": [
+        "precio",
+        "soporte",
+        "potencia"
+      ],
+      "para": "El punto dulce de la línea: un procesador H con más músculo que un i5 de oficina, a precio de equipo administrativo.",
+      "noPara": "Quien necesita autonomía máxima: los procesadores H gastan más batería que los U.",
+      "alerta": "Pantalla, batería, peso y condición no constan en el catálogo.",
+      "fuente": "Catálogo indexado de econnet.cl",
+      "fecha": "18-09-2026",
+      "confianza": "media"
+    },
+    {
+      "id": "asus-pm1-r5-7535hs",
+      "marca": "ASUS",
+      "nombre": "PM1 R5-7535HS 14\" FHD",
+      "etiqueta": "Estudio",
+      "color": "#9C8FD8",
+      "categoria": "Notebook",
+      "condicion": null,
+      "garantia": "1 año",
+      "precio": {
+        "lista": null,
+        "venta": 586051
+      },
+      "marketplaces": {},
+      "stock": {
+        "estado": "Stock desconocido",
+        "unidades": null
+      },
+      "specs": {
+        "cpu": "AMD Ryzen 5 7535HS",
+        "gpu": null,
+        "ram": "8 GB",
+        "almacenamiento": "512 GB SSD",
+        "pantalla": "14\" FHD",
+        "so": "Windows 11 Home",
+        "conectividad": null,
+        "seguridad": null,
+        "bateria": null,
+        "peso": null
+      },
+      "usos": [
+        "estudiar",
+        "trabajar"
+      ],
+      "valores": [
+        "precio",
+        "portabilidad"
+      ],
+      "para": "Universidad y oficina básica: Ryzen 5 con Windows incluido por menos de $600.000.",
+      "noPara": "Multitarea pesada: 8 GB se quedan cortos en cuanto abres muchas cosas a la vez.",
+      "alerta": "Precio visto en el catálogo indexado, no en la ficha. Confirmar antes de publicar.",
+      "fuente": "Catálogo indexado de econnet.cl",
+      "fecha": "18-09-2026",
+      "confianza": "baja"
+    },
+    {
+      "id": "asus-chromebook-cz1104",
+      "marca": "ASUS",
+      "nombre": "Chromebook CZ1104CM2A-N00147",
+      "etiqueta": "Entrada",
+      "color": "#8FA8D8",
+      "categoria": "Notebook",
+      "condicion": null,
+      "garantia": null,
+      "precio": {
+        "lista": 550029,
+        "venta": 300990
+      },
+      "marketplaces": {},
+      "stock": {
+        "estado": "Stock desconocido",
+        "unidades": null
+      },
+      "specs": {
+        "cpu": null,
+        "gpu": null,
+        "ram": null,
+        "almacenamiento": null,
+        "pantalla": null,
+        "so": "ChromeOS",
+        "conectividad": null,
+        "seguridad": null,
+        "bateria": null,
+        "peso": null
+      },
+      "usos": [
+        "estudiar"
+      ],
+      "valores": [
+        "precio",
+        "portabilidad"
+      ],
+      "para": "Estudiar, escribir y navegar: batería larga, arranque inmediato y cero mantenimiento.",
+      "noPara": "Windows: no corre AutoCAD, ni Office de escritorio, ni programas instalados.",
+      "alerta": "Procesador, memoria, almacenamiento y pantalla no constan en el catálogo.",
+      "fuente": "Catálogo indexado de econnet.cl",
+      "fecha": "18-09-2026",
+      "confianza": "baja"
+    },
+    {
+      "id": "asus-tuf-f16-fx607vj",
+      "marca": "ASUS",
+      "nombre": "TUF Gaming F16 FX607VJ-RL027W",
+      "etiqueta": "Gaming",
+      "color": "#FF6B8A",
+      "categoria": "Notebook",
+      "condicion": "Nuevo",
+      "garantia": "1 año",
+      "precio": {
+        "lista": null,
+        "venta": null
+      },
+      "marketplaces": {
+        "lider": 999990,
+        "falabella": 999990
+      },
+      "stock": {
+        "estado": "Stock desconocido",
+        "unidades": null
+      },
+      "specs": {
+        "cpu": "Intel Core 5 210H · 8 núcleos, 12 hilos, hasta 4,8 GHz, 12 MB",
+        "gpu": "NVIDIA GeForce RTX 3050 Laptop · 6 GB GDDR6",
+        "ram": "16 GB DDR4",
+        "almacenamiento": "512 GB SSD M.2 NVMe PCIe 4.0",
+        "pantalla": "16\" 16:10 a 144 Hz · 1920 × 1200",
+        "so": "Windows 11 Home",
+        "conectividad": "Wi-Fi 6 · Bluetooth 5.3 · USB, HDMI, RJ-45",
+        "seguridad": null,
+        "bateria": null,
+        "peso": "2,2 kg"
+      },
+      "usos": [
+        "jugar",
+        "crear"
+      ],
+      "valores": [
+        "potencia",
+        "pantalla"
+      ],
+      "para": "Jugar en alto a 144 Hz y editar sin esperar, con gráfica dedicada de 6 GB.",
+      "noPara": "Andar todo el día con él: 2,2 kg, y con gráfica dedicada la batería rinde mucho menos.",
+      "alerta": "Precio de marketplace. El precio en econnet.cl no consta.",
+      "fuente": "Publicación de Econnet en Lider",
+      "fecha": "18-09-2026",
+      "confianza": "alta"
+    },
+    {
+      "id": "asus-gaming-v16-v3607",
+      "marca": "ASUS",
+      "nombre": "Gaming V16 V3607",
+      "etiqueta": "Gaming",
+      "color": "#FF8A5C",
+      "categoria": "Notebook",
+      "condicion": null,
+      "garantia": null,
+      "precio": {
+        "lista": null,
+        "venta": null
+      },
+      "marketplaces": {
+        "falabella": 1499990
+      },
+      "stock": {
+        "estado": "Stock desconocido",
+        "unidades": null
+      },
+      "specs": {
+        "cpu": "Intel Core 7",
+        "gpu": "NVIDIA GeForce RTX 5060",
+        "ram": "16 GB",
+        "almacenamiento": "512 GB SSD",
+        "pantalla": "16\" WUXGA a 144 Hz",
+        "so": null,
+        "conectividad": null,
+        "seguridad": null,
+        "bateria": null,
+        "peso": null
+      },
+      "usos": [
+        "jugar",
+        "crear"
+      ],
+      "valores": [
+        "potencia",
+        "pantalla"
+      ],
+      "para": "Gráfica de generación actual: juego en alto y también render y edición acelerada.",
+      "noPara": "Quien busca portabilidad o silencio: la línea gaming pesa, suena y calienta.",
+      "alerta": "Precio de marketplace. El precio en econnet.cl no consta; condición no declarada.",
+      "fuente": "Publicación de Econnet en Falabella",
+      "fecha": "18-09-2026",
+      "confianza": "media"
+    },
+    {
+      "id": "apple-imac24-m3-rosa",
+      "marca": "Apple",
+      "nombre": "iMac 24\" M3 (2023)",
+      "etiqueta": "Openbox",
+      "color": "#E39BB8",
+      "categoria": "All-in-One",
+      "condicion": "Openbox",
+      "garantia": null,
+      "precio": {
+        "lista": 1899990,
+        "venta": 1299990
+      },
+      "marketplaces": {},
+      "stock": {
+        "estado": "Stock desconocido",
+        "unidades": null
+      },
+      "specs": {
+        "cpu": "Apple M3",
+        "gpu": null,
+        "ram": "8 GB",
+        "almacenamiento": "256 GB SSD",
+        "pantalla": "24\"",
+        "so": "macOS",
+        "conectividad": null,
+        "seguridad": null,
+        "bateria": null,
+        "peso": null
+      },
+      "usos": [
+        "crear",
+        "trabajar",
+        "renovados"
+      ],
+      "valores": [
+        "pantalla"
+      ],
+      "para": "Un puesto fijo silencioso y con buena pantalla, pagando precio de caja abierta.",
+      "noPara": "Archivos grandes: 256 GB se llenan rápido, y en un iMac el disco no se amplía.",
+      "alerta": "Openbox: caja abierta, equipo sin uso. Color rosa.",
+      "fuente": "Catálogo indexado de econnet.cl",
+      "fecha": "18-09-2026",
+      "confianza": "media"
+    },
+    {
+      "id": "asus-aio-p400-i5",
+      "marca": "ASUS",
+      "nombre": "AIO ExpertCenter P400 (i5)",
+      "etiqueta": "Puesto fijo",
+      "color": "#6FA8D8",
+      "categoria": "All-in-One",
+      "condicion": null,
+      "garantia": null,
+      "precio": {
+        "lista": 1370990,
+        "venta": 1158990
+      },
+      "marketplaces": {},
+      "stock": {
+        "estado": "Stock desconocido",
+        "unidades": null
+      },
+      "specs": {
+        "cpu": "Intel Core i5",
+        "gpu": null,
+        "ram": "16 GB DDR5",
+        "almacenamiento": "512 GB SSD M.2 NVMe",
+        "pantalla": null,
+        "so": "Windows 11 Pro",
+        "conectividad": null,
+        "seguridad": null,
+        "bateria": null,
+        "peso": null
+      },
+      "usos": [
+        "empresa",
+        "trabajar"
+      ],
+      "valores": [
+        "soporte",
+        "pantalla"
+      ],
+      "para": "Puesto administrativo fijo sin torre ni cables: llega, se enchufa y funciona.",
+      "noPara": "Quien tenga que llevarse el equipo a terreno o a la casa.",
+      "alerta": "El catálogo muestra el mismo precio para la versión i5 (16 GB) y la i7 (32 GB). Confirmar antes de publicar.",
+      "fuente": "Catálogo indexado de econnet.cl",
+      "fecha": "18-09-2026",
+      "confianza": "baja"
+    },
+    {
+      "id": "hp-elitebook-840-g5",
+      "marca": "HP",
+      "nombre": "EliteBook 840 G5",
+      "etiqueta": "Renovado",
+      "color": "#88C0A8",
+      "categoria": "Notebook",
+      "condicion": "Seminuevo",
+      "garantia": null,
+      "precio": {
+        "lista": 589990,
+        "venta": 499990
+      },
+      "marketplaces": {},
+      "stock": {
+        "estado": "Stock desconocido",
+        "unidades": null
+      },
+      "specs": {
+        "cpu": "Intel Core i7",
+        "gpu": null,
+        "ram": "8 GB",
+        "almacenamiento": "512 GB SSD",
+        "pantalla": null,
+        "so": "Windows 11 Pro",
+        "conectividad": null,
+        "seguridad": null,
+        "bateria": null,
+        "peso": null
+      },
+      "usos": [
+        "renovados",
+        "trabajar",
+        "estudiar"
+      ],
+      "valores": [
+        "precio"
+      ],
+      "para": "Medio millón por un chasis corporativo con i7 y Windows Pro: el mejor precio por equipo serio del catálogo.",
+      "noPara": "Quien abre muchas aplicaciones a la vez: acá mandan los 8 GB, no el i7.",
+      "alerta": "Pantalla, batería, peso y stock no constan en el catálogo.",
+      "fuente": "Catálogo indexado de econnet.cl",
+      "fecha": "18-09-2026",
+      "confianza": "media"
+    },
+    {
+      "id": "dell-latitude-7290",
+      "marca": "Dell",
+      "nombre": "Latitude 7290 12,5\"",
+      "etiqueta": "Renovado",
+      "color": "#8C9BB8",
+      "categoria": "Notebook",
+      "condicion": "Reacondicionado",
+      "garantia": null,
+      "precio": {
+        "lista": null,
+        "venta": null
+      },
+      "marketplaces": {
+        "falabella": 399990
+      },
+      "stock": {
+        "estado": "Stock desconocido",
+        "unidades": null
+      },
+      "specs": {
+        "cpu": "Intel Core i5 de 8ª generación",
+        "gpu": null,
+        "ram": "8 GB",
+        "almacenamiento": "256 GB SSD",
+        "pantalla": "12,5\" HD",
+        "so": null,
+        "conectividad": null,
+        "seguridad": null,
+        "bateria": null,
+        "peso": null
+      },
+      "usos": [
+        "renovados",
+        "estudiar",
+        "trabajar"
+      ],
+      "valores": [
+        "precio",
+        "portabilidad"
+      ],
+      "para": "El equipo de entrada: liviano, barato y suficiente para clases, correo y ofimática.",
+      "noPara": "Planillas todo el día: 12,5 pulgadas en HD se quedan cortas.",
+      "alerta": "Precio de marketplace. El precio en econnet.cl no consta.",
+      "fuente": "Publicación de Econnet en Falabella",
+      "fecha": "18-09-2026",
+      "confianza": "media"
+    },
+    {
+      "id": "xiaomi-camera-c300",
+      "sku": "9920",
+      "url": "https://econnet.cl/producto/camara-seguridad-xiaomi-smart-camera-c300/",
+      "marca": "Xiaomi",
+      "nombre": "Smart Camera C300",
+      "etiqueta": "Seguridad",
+      "color": "#7FD8C8",
+      "categoria": "Cámaras de seguridad",
+      "condicion": null,
+      "garantia": null,
+      "precio": {
+        "lista": 79990,
+        "venta": 59990
+      },
+      "marketplaces": {},
+      "stock": {
+        "estado": "Stock desconocido",
+        "unidades": null
+      },
+      "specs": {
+        "cpu": null,
+        "gpu": null,
+        "ram": null,
+        "almacenamiento": "MicroSD hasta 256 GB",
+        "pantalla": "2K · 2304 × 1296, visión nocturna, giro 360°, interior",
+        "so": "App Xiaomi Mi Home · Android 4.4 o iOS 9.0 en adelante",
+        "conectividad": "Wi-Fi · audio de ida y vuelta",
+        "seguridad": null,
+        "bateria": null,
+        "peso": "0,7 kg"
+      },
+      "usos": [
+        "proteger"
+      ],
+      "valores": [
+        "precio"
+      ],
+      "para": "Mirar la casa o el local desde el teléfono, con visión nocturna, giro completo y audio en los dos sentidos.",
+      "noPara": "Exterior a la intemperie: es una cámara de interior.",
+      "alerta": null,
+      "fuente": "Ficha de producto en econnet.cl",
+      "fecha": "18-09-2026",
+      "confianza": "alta"
+    },
+    {
+      "id": "xiaomi-monitor-a24i",
+      "marca": "Xiaomi",
+      "nombre": "Monitor A24I",
+      "etiqueta": "Monitor",
+      "color": "#9FB8D8",
+      "categoria": "Monitores",
+      "condicion": null,
+      "garantia": null,
+      "precio": {
+        "lista": 133200,
+        "venta": 95200
+      },
+      "marketplaces": {},
+      "stock": {
+        "estado": "Stock desconocido",
+        "unidades": null
+      },
+      "specs": {
+        "cpu": null,
+        "gpu": null,
+        "ram": null,
+        "almacenamiento": null,
+        "pantalla": null,
+        "so": null,
+        "conectividad": null,
+        "seguridad": null,
+        "bateria": null,
+        "peso": null
+      },
+      "usos": [
+        "monitores",
+        "empresa",
+        "trabajar"
+      ],
+      "valores": [
+        "precio"
+      ],
+      "para": "Segunda pantalla barata para completar un puesto de oficina.",
+      "noPara": "Trabajo de color: sin datos de panel ni de cobertura, no lo recomendamos para diseño.",
+      "alerta": "Tamaño, resolución, panel y frecuencia no constan en el catálogo.",
+      "fuente": "Catálogo indexado de econnet.cl",
+      "fecha": "18-09-2026",
+      "confianza": "baja"
+    }
+  ],
+  "traduce": {
+    "cpu": "Quién hace el trabajo. Manda en render, compilación y planillas enormes.",
+    "gpu": "Quién dibuja: juego, 3D y edición. Si no haces eso, no la necesitas.",
+    "ram": "Cuántas cosas puedes tener abiertas a la vez sin que se ponga lento.",
+    "almacenamiento": "Cuánto cabe y qué tan rápido abre. NVMe es el rápido.",
+    "pantalla": "Donde miras ocho horas. Se nota más que el procesador.",
+    "so": "Qué programas vas a poder instalar, y cómo se conecta al dominio de una empresa.",
+    "conectividad": "Si vas a poder enchufar el proyector, la red por cable y el monitor.",
+    "seguridad": "Huella, TPM y obturador: lo que pide el área de TI de una empresa.",
+    "bateria": "Autonomía declarada por el fabricante en uso liviano. En uso real, cuenta bastante menos.",
+    "peso": "El dato que más se siente y el que nadie mira hasta el segundo mes."
+  }
+}

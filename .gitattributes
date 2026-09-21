@@ -1,0 +1,4 @@
+# Fuerza LF en todos los archivos de texto.
+# Crítico para entrypoint.sh y scripts que corren en contenedores Linux.
+* text=auto eol=lf
+*.sh eol=lf

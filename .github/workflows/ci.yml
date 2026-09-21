@@ -1,0 +1,49 @@
+# CI del backend. typecheck → lint → test → build, y el deploy depende de esto.
+name: verificar
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: econnet
+          POSTGRES_PASSWORD: econnet
+          POSTGRES_DB: econnet_test
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U econnet"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
+    env:
+      DATABASE_URL: postgresql://econnet:econnet@localhost:5432/econnet_test
+      DATABASE_URL_TEST: postgresql://econnet:econnet@localhost:5432/econnet_test
+      APP_SECRET: secreto-de-integracion-continua-0123456789
+      CRON_SECRET: cron-de-pruebas
+      NODE_ENV: test
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+      - run: npx prisma generate
+      # Falla si entra una dependencia con fallo conocido de gravedad alta.
+      # Lo que no se mira en cada push, se descubre el día del incidente.
+      - run: npm audit --omit=dev --audit-level=high
+      - run: npm run typecheck
+      - run: npm run lint
+      - run: npm test
+      - run: npm run build

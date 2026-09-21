@@ -1,0 +1,445 @@
+// Econnet · esquema de datos.
+//
+// Lo que antes vivía en un almacén de claves vive aquí en tablas, y eso
+// permite tres cosas que allí eran artesanía: transacciones, condiciones en el
+// propio UPDATE (reservar stock sin carreras) y colas con FOR UPDATE SKIP
+// LOCKED. La honestidad del catálogo se conserva: lo que no consta es NULL, no
+// un valor plausible.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Prisma 7: la URL vive en prisma.config.ts y el cliente usa un adaptador.
+datasource db {
+  provider = "postgresql"
+}
+
+enum Condicion {
+  NUEVO
+  OPENBOX
+  REACONDICIONADO
+  SEMINUEVO
+  USADO
+}
+
+enum EstadoStock {
+  EN_STOCK
+  LIMITADO
+  SIN_EXISTENCIAS
+  DESCONOCIDO
+}
+
+enum Confianza {
+  ALTA
+  MEDIA
+  BAJA
+}
+
+model Producto {
+  id              String       @id
+  slug            String       @unique
+  sku             String?      @unique
+  marca           String
+  nombre          String
+  etiqueta        String
+  color           String
+  categoria       String
+  /// Categoría fina y tipo, cuando la fuente los declara. NULL = no consta.
+  subcategoria    String?
+  tipoProducto    String?
+  /// El modelo, separado de la marca, cuando la fuente lo distingue.
+  modelo          String?
+  /// NULL = la ficha no declara la condición. No se rellena a ojo.
+  condicion       Condicion?
+  garantia        String?
+  /// Precio de econnet.cl. NULL = no se vende en línea, se consulta.
+  precioLista     Int?
+  precioVenta     Int?
+  /// Precios de marketplace, aparte a propósito: no son el precio de la tienda.
+  precioFalabella Int?
+  precioLider     Int?
+  /// Lo que costó comprarlo, neto y sin IVA. NULL = no consta, y entonces el
+  /// margen **no se calcula**: un margen sobre un coste inventado es peor que
+  /// no tener margen, porque se decide con él.
+  costoNeto       Int?
+  stockEstado     EstadoStock  @default(DESCONOCIDO)
+  stockUnidades   Int?
+  /// Reservas vivas. La resta contra stockUnidades se hace en el propio UPDATE.
+  reservadas      Int          @default(0)
+  specs           Json
+  usos            String[]
+  valores         String[]
+  /// Para quién es y para quién no. NULL = todavía no se ha escrito, y el
+  /// panel lo cuenta como hueco. Vacío se distingue de «no consta».
+  para            String?
+  noPara          String?
+  alerta          String?
+  /// Descripción corta (ficha) y larga (SEO). NULL = no hay texto propio.
+  descripcionCorta String?
+  descripcionLarga String?
+  /// La imagen principal y la galería. Vacío = no hay foto, y así se dice: la
+  /// tarjeta dibuja un equipo genérico en vez de enseñar una foto de otro.
+  imagenUrl       String?
+  imagenAlt       String?
+  imagenes        String[]     @default([])
+  fuente          String
+  fechaDato       String
+  confianza       Confianza
+  creado          DateTime     @default(now())
+  actualizado     DateTime     @updatedAt
+  /// Fuera del catálogo público sin borrarlo: los pedidos que lo llevan
+  /// siguen teniendo su producto. NULL = a la venta. Regla 1 de NEXO HQ.
+  archivado       DateTime?
+
+  itemsCarrito CarritoItem[]
+  itemsPedido  PedidoItem[]
+  cambios      CambioProducto[]
+
+  @@index([categoria])
+  @@index([marca])
+  @@index([archivado])
+}
+
+/// Los ajustes del negocio, editables desde el panel y sin volver a desplegar:
+/// tarifas de envío, descuento por volumen, WhatsApp, datos legales.
+///
+/// Aquí **nunca** hay secretos. Las credenciales de pago, el secreto de la
+/// aplicación y el hash de la clave del panel siguen en el entorno, donde no
+/// los lee quien entra al panel ni quien consiga una copia de la base.
+model Ajuste {
+  clave       String   @id
+  valor       String
+  autor       String   @default("panel")
+  actualizado DateTime @updatedAt
+}
+
+/// Las fotografías, guardadas en la propia base.
+///
+/// A propósito: a esta escala son decenas de megas, y así no hace falta ni un
+/// bucket ni un volumen. Sobreviven a un redespliegue, entran en la copia de
+/// seguridad y no hay un segundo sitio que se pueda quedar sin permisos. Si
+/// algún día esto pasa de unos cientos de megas, toca almacenamiento aparte.
+model Medio {
+  id     String   @id @default(uuid())
+  /// El nombre con el que se subió, solo para reconocerlo en el panel.
+  nombre String
+  /// Tipo detectado de los primeros bytes, no el que dijo el navegador.
+  tipo   String
+  bytes  Int
+  datos  Bytes
+  creado DateTime @default(now())
+}
+
+/// Cada cambio hecho desde el panel de inventario. Quién, cuándo, qué decía
+/// antes y qué dice ahora. Sin esto, «el precio estaba mal» no tiene respuesta.
+model CambioProducto {
+  id         String   @id @default(uuid())
+  productoId String
+  campo      String
+  /// Como texto, a propósito: sirve igual para un precio, un enum o una lista.
+  /// NULL significa que el campo no constaba, y se distingue de "".
+  antes      String?
+  despues    String?
+  motivo     String?
+  /// Quién lo tocó. Hoy solo hay un panel y una clave: «panel».
+  autor      String   @default("panel")
+  fecha      DateTime @default(now())
+
+  producto Producto @relation(fields: [productoId], references: [id], onDelete: Cascade)
+
+  @@index([productoId, fecha])
+  @@index([fecha])
+}
+
+model Lead {
+  id                  String    @id @default(uuid())
+  correo              String    @unique
+  nombre              String?
+  origen              String
+  origenes            String[]
+  etiquetas           String[]
+  consienteMarketing  Boolean   @default(false)
+  consentimientoTexto String?
+  consentimientoFecha DateTime?
+  bajaFecha           DateTime?
+  bajaMotivo          String?
+  creado              DateTime  @default(now())
+  actualizado         DateTime  @updatedAt
+}
+
+enum EstadoCarrito {
+  ABIERTO
+  VACIO
+  COMPRADO
+  PARADO
+  TERMINADA
+}
+
+model Carrito {
+  id            String        @id @default(uuid())
+  correo        String?
+  consiente     Boolean       @default(false)
+  estado        EstadoCarrito @default(ABIERTO)
+  valor         Int           @default(0)
+  /// Día de la secuencia que toca y cuándo. Un índice, no un barrido.
+  diaSecuencia  Int           @default(0)
+  proximoCorreo DateTime?
+  creado        DateTime      @default(now())
+  actualizado   DateTime      @updatedAt
+
+  items  CarritoItem[]
+  pedidos Pedido[]
+
+  @@index([estado, proximoCorreo])
+}
+
+model CarritoItem {
+  id         String   @id @default(uuid())
+  carrito    Carrito  @relation(fields: [carritoId], references: [id], onDelete: Cascade)
+  carritoId  String
+  producto   Producto @relation(fields: [productoId], references: [id])
+  productoId String
+  cantidad   Int
+
+  @@unique([carritoId, productoId])
+}
+
+/// Qué pasó con el stock que este pedido reservó. Es lo que hace que
+/// consumirlo o liberarlo sea idempotente: la transición de este campo es
+/// atómica, y solo quien la gana toca el contador del producto.
+enum EstadoStockPedido {
+  RESERVADO
+  CONSUMIDO
+  LIBERADO
+}
+
+enum EstadoPedido {
+  POR_CONFIRMAR
+  PENDIENTE_PAGO
+  PAGADO
+  PREPARANDO
+  DESPACHADO
+  ENTREGADO
+  ANULADO
+  DEVUELTO
+  REVISAR
+}
+
+enum ModoDespacho {
+  DESPACHO
+  RETIRO
+}
+
+enum TipoDocumento {
+  BOLETA
+  FACTURA
+}
+
+model Pedido {
+  id                String        @id @default(uuid())
+  numero            String        @unique
+  estado            EstadoPedido
+  subtotal          Int
+  descuento         Int           @default(0)
+  /// NULL = despacho por confirmar. Con NULL no se cobra.
+  envio             Int?
+  total             Int
+  neto              Int
+  iva               Int
+  cuponCodigo       String?
+  contactoNombre    String
+  contactoCorreo    String
+  contactoTelefono  String?
+  despachoModo      ModoDespacho
+  despachoRegion    String?
+  despachoComuna    String?
+  despachoDireccion String?
+  despachoNotas     String?
+  documentoTipo     TipoDocumento
+  rut               String?
+  razonSocial       String?
+  giro              String?
+  direccionFactura  String?
+  /// Cuándo aceptó las condiciones. Es la prueba de que las aceptó: sin fecha
+  /// no hay consentimiento que enseñar si alguien reclama.
+  terminosEn        DateTime?
+  stockPorConfirmar Boolean       @default(false)
+  envioPorConfirmar Boolean       @default(false)
+  /// Reservado al crear, consumido al pagar, liberado al anular o caducar.
+  /// Nunca dos veces: la transición se gana con un UPDATE condicional.
+  stockEstado       EstadoStockPedido @default(RESERVADO)
+  pagoMetodo        String?
+  pagoEstado        String?
+  pagoReferencia    String?       @unique
+  pagoMonto         Int?
+  pagoFecha         DateTime?
+  pagoBruto         Json?
+  /// Dos clics en «pagar» no son dos pedidos.
+  idempotencia      String?       @unique
+  carrito           Carrito?      @relation(fields: [carritoId], references: [id])
+  carritoId         String?
+  caducaEn          DateTime?
+  creado            DateTime      @default(now())
+  actualizado       DateTime      @updatedAt
+
+  items   PedidoItem[]
+  eventos PedidoEvento[]
+
+  @@index([estado, caducaEn])
+  @@index([contactoCorreo])
+}
+
+model PedidoItem {
+  id         String     @id @default(uuid())
+  pedido     Pedido     @relation(fields: [pedidoId], references: [id], onDelete: Cascade)
+  pedidoId   String
+  producto   Producto   @relation(fields: [productoId], references: [id])
+  productoId String
+  /// Nombre y precio congelados: el catálogo cambia, el pedido no.
+  nombre     String
+  precio     Int
+  cantidad   Int
+  condicion  Condicion?
+}
+
+model PedidoEvento {
+  id       String       @id @default(uuid())
+  pedido   Pedido       @relation(fields: [pedidoId], references: [id], onDelete: Cascade)
+  pedidoId String
+  estado   EstadoPedido
+  nota     String?
+  fecha    DateTime     @default(now())
+}
+
+enum TipoCupon {
+  PORCENTAJE
+  MONTO
+}
+
+model Cupon {
+  codigo       String    @id
+  tipo         TipoCupon
+  valor        Int
+  minimo       Int       @default(0)
+  caduca       DateTime?
+  /// NULL = sin tope de usos.
+  usos         Int?
+  usados       Int       @default(0)
+  unoPorCorreo Boolean   @default(true)
+  creado       DateTime  @default(now())
+
+  consumos CuponUso[]
+}
+
+model CuponUso {
+  id          String   @id @default(uuid())
+  cupon       Cupon    @relation(fields: [cuponCodigo], references: [codigo], onDelete: Cascade)
+  cuponCodigo String
+  /// HMAC del correo: sirve para «una vez por persona» sin guardarlo otra vez.
+  correoHash  String
+  fecha       DateTime @default(now())
+
+  @@unique([cuponCodigo, correoHash])
+}
+
+enum EstadoCotizacion {
+  ENVIADA
+  VISTA
+  ACEPTADA
+  PERDIDA
+  CADUCADA
+}
+
+model Cotizacion {
+  id          String   @id @default(uuid())
+  /// Numeración propia, como la de los pedidos. Una cotización sin número no
+  /// se puede nombrar por teléfono, y la venta B2B se cierra por teléfono.
+  numero      String   @unique
+  correo      String
+  nombre      String?
+  empresa     String?
+  /// RUT de la empresa. Opcional: hay quien cotiza antes de tenerlo a mano.
+  rut         String?
+  telefono    String?
+  equipos     Int
+  perfil      String
+  presupuesto Int
+  accesorios  Boolean
+
+  estado      EstadoCotizacion @default(ENVIADA)
+  /// Las líneas tal como se propusieron: modelo, condición y precio del día.
+  /// Se guardan aquí porque el catálogo cambia y la propuesta enviada no.
+  propuesta   Json
+  /// Lo que no se pudo cerrar y por qué: stock, accesorios, descuento.
+  huecos      Json
+  neto        Int      @default(0)
+  iva         Int      @default(0)
+  descuento   Int      @default(0)
+  total       Int      @default(0)
+  /// Un precio sin fecha de caducidad es una promesa que no se puede cumplir.
+  validaHasta DateTime
+
+  /// Seguimiento: qué recordatorio toca y cuándo. Índice, no barrido.
+  seguimiento   Int       @default(0)
+  proximoCorreo DateTime?
+
+  creado      DateTime @default(now())
+  actualizado DateTime @updatedAt
+
+  @@index([estado, proximoCorreo])
+}
+
+enum EstadoCorreo {
+  PENDIENTE
+  ENVIANDO
+  ENVIADO
+  FALLADO
+}
+
+model CorreoEncolado {
+  id             String       @id @default(uuid())
+  para           String
+  asunto         String
+  html           String
+  texto          String
+  bajaUrl        String?
+  transaccional  Boolean      @default(false)
+  /// Clave de idempotencia: el mismo correo no se encola dos veces.
+  clave          String?      @unique
+  intentos       Int          @default(0)
+  estado         EstadoCorreo @default(PENDIENTE)
+  programadoPara DateTime     @default(now())
+  error          String?
+  creado         DateTime     @default(now())
+  actualizado    DateTime     @updatedAt
+
+  @@index([estado, programadoPara])
+}
+
+model CorreoDiario {
+  id         String @id @default(uuid())
+  correoHash String
+  dia        String
+  cantidad   Int    @default(0)
+
+  @@unique([correoHash, dia])
+}
+
+model Contador {
+  clave String @id
+  valor Int    @default(0)
+}
+
+/// Contador del límite por IP, compartido entre instancias.
+///
+/// En memoria, cada proceso cuenta por su cuenta: con tres instancias detrás
+/// de un balanceador, el límite real es el triple del configurado. Con esto,
+/// las tres cuentan sobre la misma fila.
+model LimitePeticion {
+  clave    String   @id
+  golpes   Int      @default(0)
+  expira   DateTime
+
+  @@index([expira])
+}
