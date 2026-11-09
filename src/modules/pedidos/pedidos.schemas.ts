@@ -55,6 +55,7 @@ export const crearPedidoSchema = z
     documento: documentoSchema,
     cupon: z.string().max(40).optional(),
     carritoId: z.string().uuid().optional(),
+    pasarela: z.enum(["webpay", "mercadopago"]).optional(),
     idempotencia: z.string().min(8).max(64),
     /**
      * El total que el checkout tenía en pantalla. **Lo único que se acepta del

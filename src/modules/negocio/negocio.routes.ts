@@ -10,6 +10,7 @@ import { Router } from "express";
 import { ajuste } from "../../services/ajustes.js";
 import { verMedio } from "../../services/medios.js";
 import { noEncontrado } from "../../middlewares/errores.js";
+import { pasarelasHabilitadas } from "../../services/pagos.js";
 
 export const rutasNegocio = Router();
 
@@ -32,6 +33,12 @@ rutasNegocio.get("/negocio", (_req, res) => {
       whatsapp: oNulo("WHATSAPP")
     }
   });
+});
+
+/** Pasarelas de pago disponibles para el checkout. */
+rutasNegocio.get("/pasarelas", (_req, res) => {
+  res.set("Cache-Control", "public, max-age=60");
+  res.json({ ok: true, pasarelas: pasarelasHabilitadas() });
 });
 
 /**

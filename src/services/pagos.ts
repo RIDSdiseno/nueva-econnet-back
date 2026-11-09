@@ -203,7 +203,6 @@ const pasarelas: Record<string, Pasarela> = { simulado, webpay, mercadopago };
 
 export const pasarelaActiva = (): string => env.PASARELA;
 export const pasarela = (): Pasarela => {
-  /* Segunda barrera, por si alguien cambia la variable con el proceso vivo. */
   if (esProduccion && env.PASARELA === "simulado") {
     throw new Error("En producción hace falta una pasarela real: «simulado» no cobra nada");
   }
@@ -214,3 +213,29 @@ export const pasarelaConfigurada = (): boolean =>
   env.PASARELA === "simulado" ||
   (env.PASARELA === "webpay" && !!env.WEBPAY_CODIGO_COMERCIO && !!env.WEBPAY_API_KEY) ||
   (env.PASARELA === "mercadopago" && !!env.MP_ACCESS_TOKEN);
+
+/** Lista de pasarelas que el checkout puede ofrecer al comprador. */
+export type NombrePasarela = "webpay" | "mercadopago";
+
+const PASARELAS_VALIDAS: NombrePasarela[] = ["webpay", "mercadopago"];
+
+export function pasarelasHabilitadas(): NombrePasarela[] {
+  if (env.PASARELAS_HABILITADAS) {
+    return env.PASARELAS_HABILITADAS.split(",")
+      .map((s) => s.trim())
+      .filter((p): p is NombrePasarela => PASARELAS_VALIDAS.includes(p as NombrePasarela));
+  }
+  /* Modo legado: una sola pasarela de PASARELA */
+  if (env.PASARELA === "simulado") return [];
+  return PASARELAS_VALIDAS.includes(env.PASARELA as NombrePasarela)
+    ? [env.PASARELA as NombrePasarela]
+    : [];
+}
+
+/** Obtiene la implementación de una pasarela por nombre. */
+export function obtenerPasarela(nombre: NombrePasarela): Pasarela {
+  if (esProduccion && nombre === ("simulado" as NombrePasarela)) {
+    throw new Error("En producción hace falta una pasarela real");
+  }
+  return pasarelas[nombre] ?? simulado;
+}

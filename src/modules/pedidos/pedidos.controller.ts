@@ -124,7 +124,7 @@ export async function crearPedidoControlador(req: Request, res: Response): Promi
   let pago = null;
   if (pedido.estado === "PENDIENTE_PAGO") {
     try {
-      pago = await iniciarPago(pedido);
+      pago = await iniciarPago(pedido, cuerpo.pasarela ?? undefined);
     } catch (error) {
       logger.error({ err: error, numero: pedido.numero }, "no se pudo arrancar el pago");
     }

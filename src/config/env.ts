@@ -39,6 +39,11 @@ const esquema = z.object({
   CORREO_TOPE_DIARIO: numero(1),
 
   PASARELA: z.enum(["simulado", "webpay", "mercadopago"]).default("simulado"),
+  /**
+   * Pasarelas que el checkout ofrece al comprador, separadas por coma.
+   * Ej: "webpay,mercadopago". Vacío = usar solo PASARELA (modo legado).
+   */
+  PASARELAS_HABILITADAS: z.string().default(""),
   WEBPAY_CODIGO_COMERCIO: z.string().default(""),
   WEBPAY_API_KEY: z.string().default(""),
   WEBPAY_BASE: z.string().default("https://webpay3gint.transbank.cl"),
